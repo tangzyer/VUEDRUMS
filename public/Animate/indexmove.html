@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"/>
+    <meta name="keywords" >
+    <link rel="stylesheet" type="text/css" href="h5.css">
+</head>
+<body>
+<div id="main">
+    <canvas id="canvas"></canvas>
+    <div id="text">
+        <img class="text_img" src="img/effect/text_02.png">
+    </div>
+    <div id="gradually">
+        <img class="logo" src="img/effect/text_01.png">
+    </div>
+
+    <div class="button" id="pc_click"></div>
+    <div class="touch">
+        <div id="phone_touch"></div>
+        <span>请长按观看</span>
+    </div>
+</div>
+<div class="vertical">
+    <span>请切换竖屏状态</span>
+</div>
+<script src="lib/jquery-3.1.0.min.js"></script>
+<script type="text/javascript">
+
+    //控制音乐播放
+
+
+    //页面加载时调用
+    $(function () {
+        orient();
+        background();
+    });
+    //用户变化屏幕方向时调用
+    $(window).bind('orientationchange', function (e) {
+        orient();
+        //解决微信浏览器无法使用window.location.reload()刷新页面
+        window.location.href=window.location.href+"?id="+10000*Math.random();
+    });
+
+    //检测手机横竖屏
+    function orient() {
+        if (window.orientation == 0 || window.orientation == 180) {
+            $("#main").show();
+        }
+        else if (window.orientation == 90 || window.orientation == -90) {
+            $("#main").hide();
+
+        }
+    }
+    var w = window.document.body.clientWidth;
+    var h = window.document.body.clientHeight;
+    var img_w = 4130;
+    var img_h = 2639;
+    //背景图片
+    function background() {
+        var canvas = $("#canvas")[0];
+        canvas.width = w;
+        canvas.height = h;
+        var ctx = canvas.getContext("2d");
+        var bgimg = new Image();
+        bgimg.src = "img/长按图片.jpg";
+        bgimg.onload = function () {
+            ctx.drawImage(bgimg, 0, 0, img_w, img_h, left, 0, img_w*((canvas.height+20)/img_h), canvas.height);
+            if(h/w > 1.85){
+              $('.text_img').css('height', 0.75 * canvas.height);
+              $('.logo').css('height', 0.75 * canvas.height);
+            }
+            else{
+              $('.text_img').css('height', 1.0 * canvas.height);
+              $('.logo').css('height', 1.0 * canvas.height);
+            }
+            $('#gradually').css('left', parseInt(w/5)).fadeIn(3000);
+            imw = parseInt($('.text_img').css('width'));
+            grw = parseInt($('.logo').css('width'));
+        };
+
+
+        var left = 0;
+
+        var left_logo = parseInt(w/3);
+        var left_but = parseInt(w/1.5);
+
+        //判断是否是手机
+        if (navigator.userAgent.match(/(iPhone|iPad|iPod|Android|ios)/i)) {
+            $('.button').fadeOut();
+            $(".touch").fadeIn();
+        } else {
+            $('.button').fadeIn();
+            $(".touch").fadeOut();
+        }
+
+        var i = 1;
+        var bw = 0;
+        var imw = 0;
+        var grw = 0;
+        var top = 0;
+        var flag = true;
+        var faw = 0;
+
+
+        console.log(img_w);
+        var timer;
+        $('#pc_click').on('mousedown', function (e) {
+            e.preventDefault();
+            timer = setInterval(rebgimg,10);
+        });
+        $('#pc_click').on('mouseup', function (e) {
+            e.preventDefault();
+            clearInterval(timer);
+        });
+        $('#phone_touch').on('touchstart', function (e) {
+            e.preventDefault();
+            timer = setInterval(rebgimg,10);
+
+        });
+        $('#phone_touch').on('touchend', function (e) {
+            e.preventDefault();
+            clearInterval(timer);
+        });
+        //背景图移动
+        function rebgimg() {
+
+            if ($("#text_03").length == 0) {
+                left -= 1;
+                ctx.clearRect(0, 0, img_w , canvas.height);
+
+                console.log("移"+left);
+                console.log("停"+img_w);
+                var arg=0;
+                if(h/w > 2){
+                    arg=120;
+                }
+                ctx.drawImage(bgimg, 0, 0, img_w , img_h, left-arg, 0, img_w *((canvas.height+20)/img_h), canvas.height);
+
+                if (left < 0) {
+                    left_logo -= 1.5;
+                    $('#gradually').css('left', left_logo);
+                }
+
+                /*让第一张图片出来*/
+                if (left == (-grw+50) && flag == true) {
+                    $('.text_img').css('left', (left_but*0.5)).fadeIn();
+                    faw = left_but;
+                    flag = false;
+                }
+                $('#text>img').each(function () {
+                    var l = parseInt($(this).css('left'));
+                    l -= 1;
+                    $(this).css('left', l);
+                    if (l < -(imw)) {
+                        $(this).remove();
+                    }
+                });
+              var myEvent = new Event('animateEnd');
+
+                //最后一张图片的位置
+                var lasw = parseInt($('#text>img:last-child').css('left')-0);
+                if (i <3) {
+                    if (i == 2) {
+                        if ((faw - lasw) > (imw) || $('#text>img').length == 0) {
+                            var img1 = '<img class="text_img" id="text_0'+(i+1)+'" src="img/effect/text_0' + (i + 1) + '.png">';
+                            if ($('#text>img').length > 10) {
+                                $('#text>img:last-child').after(img1);
+                            } else {
+                                $('#text').html(img1);
+                            }
+                            $('#text>img:last-child').css('top',10).css('left', left_but*0.5).css('height',h).fadeIn(3000);
+                            faw = left_but;
+                            i++;
+                        }
+                    } else {
+                        if ((faw - lasw) > (imw) || $('#text>img').length == 0) {
+                            var img1 = '<img class="text_img" id="text_0' + (i + 1) + '" src="img/effect/text_0' + (i + 1) + '.png">';
+                            if ($('#text>img').length > 0) {
+                                $('#text>img:last-child').after(img1);
+                            }
+                            console.log("看看" + left_but);
+                            faw = left_but;
+                            i++;
+                            window.dispatchEvent(myEvent);
+                            console.log(i);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+</script>
+</body>
+</html>
