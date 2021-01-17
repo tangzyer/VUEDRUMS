@@ -45,7 +45,7 @@ data(){
       testiframe.addEventListener("animateEnd",function(e){
         self.$emit('animationEnd');
         self.end=true;
-        self.$router.push('/part39');
+        setTimeout(()=>{self.$router.push('/part39');}, 3000 )
         console.log("!End!");}
       )
     })//数字是页面布局高度差

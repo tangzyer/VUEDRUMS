@@ -69,26 +69,31 @@ export default {
         this.ton=false;
         //this.bgon=false;
         var self = this;
+
         this.$nextTick(() => {
+          self.img=require("@/assets/images/back.png");
           console.log("getting element");
+          //self.bgon=false;
           document.getElementById('myvideo').loop = false // 不设置视频循环播放  
           document.getElementById('myvideo').addEventListener('ended',function(){
             console.log("ended video playing")
             self.videoon=false;
             //self.lo=true;
             //self.bgon=false;
+            //self.bgon=true;
+            //this.img=require("@/assets/images/back.png");
             self.move();
           });
         });
       }
       else if(this.sta=="1-2"){
-         this.img=require("@/assets/images/1-1.jpg");
-         //self.bgon=true;
+        //  this.img=require("@/assets/images/1-1.jpg");
+        //  this.bgon=true;
          this.sta="2-0";
       }
       else if (this.sta=="2-0"){
         //this.lo=false;
-        this.img=require("@/assets/images/back.png");
+        //this.img=require("@/assets/images/back.png");
         this.sta="2-01";
         this.text1on=true;
         // this.$nextTick(() =>{

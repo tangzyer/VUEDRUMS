@@ -26,6 +26,15 @@ export default {
         audio.src=require("@/assets/audio/river.mp3");
          audio.play();
       }
+      else if(stage=="play"){
+        let audio = document.getElementById('audio1');
+        audio.play();
+      }
+      else if(stage=="ending"){
+        let audio = document.getElementById('audio1');
+        audio.src=require("@/assets/audio/总结.wav");
+         audio.play();
+      }
     }
   }
 }

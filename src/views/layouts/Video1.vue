@@ -24,7 +24,7 @@ export default {
   },
   methods:{
     movetoNext(){
-      this.$emit('drumVideoFinished');
+      this.$emit('sound','play');
       this.$router.push('/Answer2');
     }
   },

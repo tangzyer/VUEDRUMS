@@ -166,7 +166,7 @@ export default {
       // this.createTouchstartEventAndDispatch(trigger);
         //this.text1on=false;
         this.bgon=true;
-        this.img=require("@/assets/images/图片3-1.jpg");
+        this.img=require("@/assets/images/"+this.imagepath+"图片3-1.jpg");
         this.sta="2-3";
       }
       else if (this.sta=="2-3"){
@@ -205,7 +205,10 @@ export default {
     }
   },
   created(){
-
+      var width=document.documentElement.clientWidth;
+      var Height=document.documentElement.clientHeight;
+      var ratio=Height/width;
+      if(ratio>1.85) {this.iswide=false;this.imagepath="";}
       this.img=require("@/assets/images/1-1.jpg");
       this.text1=require("@/assets/images/文字1.png");
       this.videoSrc=require("@/assets/videos/begin.mp4")
