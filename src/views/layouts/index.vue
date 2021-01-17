@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div>
     <bg v-bind:imgurl='img' v-bind:transon="ton" v-bind:long="lo" v-show="bgon" v-bind:stage='sta' @toNext="move"></bg>
     <transition name="moveUp">
     <img class="text" :src='text1' v-if="text1on" :style="{transition:'transform '+transform+'s linear',webkitTransform:'-webkit-transform '+transform+'s linear'}" @click= "move">
@@ -47,6 +47,8 @@ export default {
       ton:false,
       transform:11,
       lo:false,
+      iswide:false,
+      imagepath:'new'
     }
   },
   components: {
@@ -124,19 +126,19 @@ export default {
 // },500)
         this.ton=true;
         this.transform=0;
-        this.img=require("@/assets/images/2-01.jpg");
+        this.img=require("@/assets/images/"+this.imagepath+"2-01.jpg");
         this.$nextTick(() =>{
           this.text1on=false;
         });
         //this.text1on=false;
         this.sta="2-02";
+        let audio = document.getElementById('audio')
+        audio.src=require("@/assets/audio/festival.mp3");
+        audio.play();
       }
       else if (this.sta=="2-02"){
         // this.bgon=false;
         //
-        let audio = document.getElementById('audio')
-        audio.src=require("@/assets/audio/festival.mp3");
-        audio.play();
         this.ton=false;
         //this.bgon=false;
         this.videoSrc=require("@/assets/videos/map.mp4")
@@ -164,12 +166,12 @@ export default {
       // this.createTouchstartEventAndDispatch(trigger);
         //this.text1on=false;
         this.bgon=true;
-        this.img=require("@/assets/images/3-1.jpg");
+        this.img=require("@/assets/images/图片3-1.jpg");
         this.sta="2-3";
       }
       else if (this.sta=="2-3"){
-        this.img=require("@/assets/images/4-1.jpg");
-        this.sta="2-4"
+        this.img=require("@/assets/images/"+this.imagepath+"图片4-1.jpg");
+        this.sta="2-6"
       }
       else if (this.sta=="2-4"){
         this.img=require("@/assets/images/4-2.jpg");
@@ -203,6 +205,7 @@ export default {
     }
   },
   created(){
+
       this.img=require("@/assets/images/1-1.jpg");
       this.text1=require("@/assets/images/文字1.png");
       this.videoSrc=require("@/assets/videos/begin.mp4")
@@ -235,9 +238,11 @@ export default {
 		top: 0;
 		right: 0;
 		bottom: 0;
-    width: 100%;
+		width: 100%;
+  	height: 100%;
     /* height: 100%; */
     z-index:200;
+    object-fit:fill;
 		/* background: url("../../common/images/1-1.jpg") no-repeat;
 		background-size: cover; */
 	}

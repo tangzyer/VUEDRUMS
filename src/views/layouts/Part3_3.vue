@@ -1,6 +1,6 @@
 
 <template>
-  <div class="app-container">
+  <div >
     <bg v-bind:imgurl='img' v-bind:stage='sta' @toNext="move"></bg>
     <audio id="audio" loop></audio>
   </div>

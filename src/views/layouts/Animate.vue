@@ -1,6 +1,6 @@
 <!--放完动画了有animationEnd信号-->
 <template>
-<div class="app-container">
+<div >
   <iframe id="bdIframe"
           src="../Animate/indexmove.html"
     scrolling="no"

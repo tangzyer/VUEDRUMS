@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div >
     <bg v-bind:imgurl='img' v-bind:transon="ton" v-bind:long="lo" v-show="bgon" v-bind:stage='sta' @toNext="move"></bg>
     <transition name="moveUp">
     <img class="text" :src='text1' v-if="text1on" :style="{transition:'transform '+transform+'s linear',webkitTransform:'-webkit-transform '+transform+'s linear'}" @click= "move">
@@ -76,12 +76,14 @@ export default {
             console.log("ended video playing")
             self.videoon=false;
             //self.lo=true;
+            //self.bgon=false;
             self.move();
           });
         });
       }
       else if(this.sta=="1-2"){
          this.img=require("@/assets/images/1-1.jpg");
+         //self.bgon=true;
          this.sta="2-0";
       }
       else if (this.sta=="2-0"){
@@ -152,9 +154,11 @@ export default {
 		top: 0;
 		right: 0;
 		bottom: 0;
-    width: 100%;
+		width: 100%;
+  	height: 100%;
     /* height: 100%; */
     z-index:200;
+    object-fit:fill;
 		/* background: url("../../common/images/1-1.jpg") no-repeat;
 		background-size: cover; */
 	}

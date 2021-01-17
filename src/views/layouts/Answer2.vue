@@ -1,7 +1,7 @@
 <!--第二个问题的组件，答题功能，答题正确则emit一事件"clickright",参数为2代表题的序号，
 答题错误则emit一事件“clickwrong",参数为2代表提的序号）-->
 <template>
-  <div class="app-container">
+  <div >
     <bg v-bind:imgurl='bgurl' v-bind:stage='sta' @toNext="move"></bg>
     <div class="answer" v-if="ifshow">
       <ul class="lists">
@@ -27,6 +27,7 @@ export default {
       val:"",
       state:false,
       qstindex:2,
+      imagepath:"new",
       bgurl:require("@/assets/images/图片11-5.jpg"),
       list:[
         {
@@ -57,14 +58,14 @@ export default {
       if(val.state){
         this.ifshow = false;
         this.sta = "11-6"
-        this.bgurl = require("@/assets/images/图片11-6.jpg")
+        this.bgurl = require("@/assets/images/"+this.imagepath+"图片11-6.jpg")
         this.$emit('clickright',this.qstindex);
         console.log("Right!")
       }
       else{
         this.sta = "11-7"
         this.ifshow = false;
-        this.bgurl = require("@/assets/images/图片11-7.jpg")
+        this.bgurl = require("@/assets/images/"+this.imagepath+"图片11-7.jpg")
         this.$emit('clickwrong',this.qstindex);
         console.log("wrong!")
       }
@@ -73,15 +74,15 @@ export default {
       if (this.sta == "11-6"){
         console.log("11-9")
         this.sta = "11-9"
-        this.bgurl = require("@/assets/images/图片11-9.jpg")
+        this.bgurl = require("@/assets/images/"+this.imagepath+"图片11-9.jpg")
       }
       else if(this.sta == "11-7"){
         this.sta = "11-10";
-        this.bgurl = require("@/assets/images/图片11-10.jpg");
+        this.bgurl = require("@/assets/images/"+this.imagepath+"图片11-10.jpg");
       }
       else if(this.sta == "11-9"){
         this.sta = "11-11"
-        this.bgurl = require("@/assets/images/图片11-11.jpg")
+        this.bgurl = require("@/assets/images/"+this.imagepath+"图片11-11.jpg")
 
       }
       else if(this.sta == "11-10"){
@@ -91,12 +92,18 @@ export default {
       }
       else if(this.sta == "11-11"){
         this.sta = "12-1"
-        this.bgurl = require("@/assets/images/图片12-1.jpg")
+        this.bgurl = require("@/assets/images/"+this.imagepath+"图片12-1.jpg")
       }
       else if(this.sta == "12-1"){
         this.$router.push('/anima');
       }
     }
+  },
+  created(){
+      var width=document.documentElement.clientWidth;
+      var Height=document.documentElement.clientHeight;
+      var ratio=Height/width;
+      if(ratio>1.85) {this.iswide=false;this.imagepath="";}
   }
 }
 

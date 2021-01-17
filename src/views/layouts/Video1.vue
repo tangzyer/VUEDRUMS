@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div>
     <div class = 'bg'>
       <transition name="fade" mode="out-in">
         <img v-bind:src="imgurl" :key="imgurl" style="height:100%;width:100%" @click="movetoNext"/>

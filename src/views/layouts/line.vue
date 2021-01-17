@@ -1,9 +1,6 @@
-<!--用canvas实现连线效果，已经写好三个函数stroke1、stroke2、stroke3，将连线的
-相应函数换成这三个即可。需要更改三个函数的起点和终点坐标，使用绝对坐标。-->
-<!--需要给每个元素加个锁，避免重复连线-->
+  
 <template>
-  <div class="app-container">
-    <!--<canvas id="canvas" width="400px" height="800px" ></canvas>-->
+  <div>
     <bg :imgurl='img' transon=true @toNext="clicking"></bg>
     <div class="grid" v-if="showoption">
 	<div class="item" id="line0" @click="choosingLine(0)"></div>
@@ -14,9 +11,9 @@
 	<div class="item" id="line5" @click="choosingLine(5)"></div>
     </div>
     <div class="but" v-if="showoption">
-        <img @click="confirm" src="~@/assets/images/确认提交.png" style="height:100%;width:100%;">
+        <img @click="confirm" src="~@/assets/images/confirm.png" style="height:100%;width:100%;">
     </div>
-    <div v-show="Lining[2]" class="l1" :style="{top:top0+'px',left:right0+'px',height:height0+'px',width:width0+'px' }">
+    <div v-show="Lining[2]" class="l1" :style="{top:top0+'px',left:right0+'px',height:height0+'px',width:width0+'px' }">  
         <img src="~@/assets/images/line1.png" style="height:100%;width:100%;" >
     </div>
     <div class="l1" v-show="Lining[3]" :style="{top:top3+'px',left:right0+'px',height:height1+'px',width:width0+'px' }">
@@ -25,7 +22,7 @@
     <div class="l1" v-show="Lining[6]" :style="{top:top3+'px',left:right0+'px',height:height3+'px',width:width0+'px' }">
         <img src="~@/assets/images/line6.png" style="height:100%;width:100%;" >
     </div>
-    <div class="l1" v-show="Lining[7]" :style="{top:top1+'px',left:right0+'px',height:height1+'px',width:width0+'px' }">
+    <div class="l1" v-show="Lining[7]" :style="{top:top1+'px',left:right0+'px',height:height1+'px',width:width0+'px' }"> 
         <img src="~@/assets/images/line6.png" style="height:100%;width:100%;" >
     </div>
     <div class="l1" v-show="Lining[1]" :style="{top:top3+'px',left:right0+'px',height:height1+'px',width:width0+'px' }">
@@ -60,7 +57,6 @@ export default {
    name: 'Linet',
    data(){
        return{
-           flag:false,
            img:"",
            showoption:true,
            correct:false,
@@ -92,7 +88,8 @@ export default {
            height2:0,
            height3:0,
            width0:0,
-           audiosrc:""
+           audiosrc:"",
+           imagepath:'new'
 
        }
    },
@@ -100,109 +97,13 @@ export default {
     Bg
   },
   created(){
+      var width=document.documentElement.clientWidth;
+      var Height=document.documentElement.clientHeight;
+      var ratio=Height/width;
+      if(ratio>1.85) {this.iswide=false;this.imagepath="";}
       this.audiosrc=require("@/assets/audio/festival.mp3")
-
   },
   methods:{
-     stroke1(){
-       var canvas = document.getElementById('canvas');
-       /* 获取canvas元素 */
-       var context = canvas.getContext('2d');
-       /* 获取上下文context */
-       context.beginPath();
-       // 参数：起点坐标
-       context.moveTo(100,100)
-       // context.quadraticCurveTo(150,10,200,200);
-       // context.quadraticCurveTo(230,350,400,400);
-       // 参数：控制点的x,y,结束点的x,y
-       // context.quadraticCurveTo(300,50,400,400);
-       // context.quadraticCurveTo(50,300,400,400);
-       // context.bezierCurveTo(200,380,200,20,400,0);
-       /*	context.moveTo(0,0);
-         // 参数：控制点的x,y,控制点的x,y,结束点x,y
-         context.bezierCurveTo(200,10,200,380,400,400);*/
-
-       context.lineTo(100,800);
-       // context.lineTo(1 00,100);
-       // context.lineTo(200,0);
-       // context.lineTo(0,100);
-       // context.closePath();
-       // 绘制
-       context.stroke();
-       //   style1={
-       //      position: "absolute",
-       //      top:top1+'px',
-       //      left:right1+'px',
-       //      width:width1+'px',
-       //   }
-       },
-       stroke2(){
-         var canvas = document.getElementById('canvas');
-         /* 获取canvas元素 */
-         var context = canvas.getContext('2d');
-         /* 获取上下文context */
-         context.beginPath();
-         // 参数：起点坐标
-         context.moveTo(100,100)
-         // context.quadraticCurveTo(150,10,200,200);
-         // context.quadraticCurveTo(230,350,400,400);
-         // 参数：控制点的x,y,结束点的x,y
-         // context.quadraticCurveTo(300,50,400,400);
-         // context.quadraticCurveTo(50,300,400,400);
-         // context.bezierCurveTo(200,380,200,20,400,0);
-         /*	context.moveTo(0,0);
-           // 参数：控制点的x,y,控制点的x,y,结束点x,y
-           context.bezierCurveTo(200,10,200,380,400,400);*/
-
-         context.lineTo(100,800);
-         // context.lineTo(1 00,100);
-         // context.lineTo(200,0);
-         // context.lineTo(0,100);
-         // context.closePath();
-         // 绘制
-         context.stroke();
-         //   style1={
-         //      position: "absolute",
-         //      top:top1+'px',
-         //      left:right1+'px',
-         //      width:width1+'px',
-         //   }
-       },
-    stroke3(){
-      var canvas = document.getElementById('canvas');
-      /* 获取canvas元素 */
-      var context = canvas.getContext('2d');
-      /* 获取上下文context */
-      context.beginPath();
-      // 参数：起点坐标
-      context.moveTo(100,100)
-      // context.quadraticCurveTo(150,10,200,200);
-      // context.quadraticCurveTo(230,350,400,400);
-      // 参数：控制点的x,y,结束点的x,y
-      // context.quadraticCurveTo(300,50,400,400);
-      // context.quadraticCurveTo(50,300,400,400);
-      // context.bezierCurveTo(200,380,200,20,400,0);
-      /*	context.moveTo(0,0);
-        // 参数：控制点的x,y,控制点的x,y,结束点x,y
-        context.bezierCurveTo(200,10,200,380,400,400);*/
-
-      context.lineTo(100,800);
-      // context.lineTo(1 00,100);
-      // context.lineTo(200,0);
-      // context.lineTo(0,100);
-      // context.closePath();
-      // 绘制
-      context.stroke();
-      //   style1={
-      //      position: "absolute",
-      //      top:top1+'px',
-      //      left:right1+'px',
-      //      width:width1+'px',
-      //   }
-    },
-    handleClone(){
-      this.flag = false;
-    },
     createTouchstartEventAndDispatch (el) {
       let event = document.createEvent('Events');
       event.initEvent('touchstart', true, true);
@@ -232,12 +133,12 @@ export default {
           }
           if(this.correctnum>0){
               this.showoption=false;
-              this.img=require('@/assets/images/6-1.jpg');
+              this.img=require('@/assets/images/'+this.imagepath+'图片6-1.jpg');
               this.sta=1;
           }
           else{
               this.showoption=false;
-              this.img=require('@/assets/images/6-2.jpg');
+              this.img=require('@/assets/images/'+this.imagepath+'6-2.jpg');
               this.sta=2;
           }
       },
@@ -286,8 +187,12 @@ export default {
       this.top3=(e0.bottom+e0.top)/2;
       this.top4=(e5.bottom+e5.top)/2;
       this.height3=this.height0+e0.height-20;
-    /*window.onload = function表示页面加载之后进行以下操作*/
-
+    //   style1={
+    //      position: "absolute",
+    //      top:top1+'px',
+    //      left:right1+'px',
+    //      width:width1+'px',
+    //   }
   }
 }
 </script>
@@ -303,7 +208,7 @@ export default {
         padding-bottom:2rem;
         padding-left:0.5rem;
         padding-right:0.5rem;
-        grid-template-columns: 4.5rem 4rem;
+        grid-template-columns: 4.5rem 4rem;  
         grid-template-rows: 4rem 4rem 4rem;
         /* grid-column-gap: 1rem; */
         grid-row-gap:1rem;
@@ -324,17 +229,17 @@ export default {
     .but{
         width:4rem;
         height:1rem;
-        position: absolute;
+        position: fixed;
         bottom: 1rem;
         left:3rem;
         right:3rem;
         text-align: center;
-        z-index:2;
+        z-index:3;
         /* background: url('~@/assets/images/confirm.png') no-repeat;
         background-size:100% 100%; */
     }
     .l1{
-       position: absolute;
+       position: fixed;
        /* left:160px;
        top:190px;
        width:50px;

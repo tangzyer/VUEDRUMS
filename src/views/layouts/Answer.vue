@@ -1,7 +1,7 @@
 <!--第一个问题的组件，答题功能，答题正确则emit一事件"clickright",参数为1代表题的序号，
 答题错误则emit一事件“clickwrong",参数为1代表提的序号）-->
 <template>
-  <div class="app-container">
+  <div >
 
     <div class="bg">
       <img v-bind:src="bgurl" :key="bgurl" style="height:100%;width:100%" />

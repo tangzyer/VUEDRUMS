@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div>
     <bg v-bind:imgurl='img' v-bind:stage='sta' @toNext="move"></bg>
   </div>
 </template>
@@ -14,7 +14,8 @@ export default {
       sta: '13-1',
       text1: '',
       text1on: false,
-      top: 7
+      top: 7,
+      imagepath:"new"
     }
   },
   components: {
@@ -26,7 +27,7 @@ export default {
     },
     move() {
       if (this.sta == '13-1'){
-        this.img = require('@/assets/images/图片13-2.jpg');
+        this.img = require('@/assets/images/'+this.imagepath+'图片13-2.jpg');
         this.sta="13-2";
         //this.text1on=true;
       }
@@ -34,16 +35,20 @@ export default {
         //<!-- 此处应有emit某信号-->
         /*复原，一定要复原*/
         this.sta="13-3"
-        this.img = require('@/assets/images/图片13-3.jpg');
+        this.img = require('@/assets/images/'+this.imagepath+'图片13-3.jpg');
       }
       else if (this.sta=="13-3"){
         this.sta="14-1";
         this.img=require('@/assets/images/图片14-1.jpg');
       }
     },
-    created(){
-      this.img=require("@/assets/images/图片13-1.jpg");
-    },
+  },
+  created(){
+      var width=document.documentElement.clientWidth;
+      var Height=document.documentElement.clientHeight;
+      var ratio=Height/width;
+      if(ratio>1.85) {this.iswide=false;this.imagepath="";}
+      this.img=require("@/assets/images/"+this.imagepath+"图片13-1.jpg");
   },
 }
 </script>

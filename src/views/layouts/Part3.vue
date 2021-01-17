@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div>
     <bg v-bind:imgurl='img' v-bind:stage='sta' @toNext="move"></bg>
     <div class="player">
     <div
@@ -22,7 +22,8 @@ export default {
       sta: '7-1',
       text1: '',
       text1on: false,
-      top: 7
+      top: 7,
+      imagepath:"new"
     }
   },
   components: {
@@ -39,7 +40,7 @@ export default {
     },
     move() {
       if (this.sta == '7-1'){
-        this.img = require("@/assets/images/7-2.jpg");
+        this.img = require("@/assets/images/"+this.imagepath+"7-2.jpg");
         this.sta="7-2";
         this.text1on=true;
         let audio = document.getElementById('audio');
@@ -48,19 +49,19 @@ export default {
       }
       else if (this.sta=="7-2"){
         this.text1on=false;
-        this.img=require("@/assets/images/图片8-1.jpg");
+        this.img=require("@/assets/images/"+this.imagepath+"图片8-1.jpg");
         this.sta="8-1";
       }
       else if (this.sta=="8-1"){
-        this.img=require("@/assets/images/图片8-2.jpg");
+        this.img=require("@/assets/images/"+this.imagepath+"图片8-2.jpg");
         this.sta="8-2";
       }
       else if (this.sta=="8-2"){
-        this.img=require("@/assets/images/图片9-1.jpg");
+        this.img=require("@/assets/images/"+this.imagepath+"图片9-1.jpg");
         this.sta="9-1"
       }
       else if (this.sta=="9-1"){
-        this.img=require("@/assets/images/图片9-2.jpg");
+        this.img=require("@/assets/images/"+this.imagepath+"图片9-2.jpg");
         this.sta="9-2"
       }
       else if (this.sta=="9-2"){
@@ -72,7 +73,11 @@ export default {
     },
   },
   created(){
-      this.img=require("@/assets/images/7-1.jpg");
+      var width=document.documentElement.clientWidth;
+      var Height=document.documentElement.clientHeight;
+      var ratio=Height/width;
+      if(ratio>1.85) {this.iswide=false;this.imagepath="";}
+      this.img=require("@/assets/images/"+this.imagepath+"7-1.jpg");
   },
   mounted(){
       let audio = document.getElementById('audio');
