@@ -19,12 +19,27 @@ Vue.prototype.$video = Video
 import '@/plugins/vant'
 // 引入全局样式
 import '@/assets/css/index.scss'
+// import '@/assets/css/h5.css'
 // 移动端适配
 import 'lib-flexible/flexible.js'
 
 // filters
 import './filters'
 Vue.config.productionTip = false
+
+// import { imgsPreloader } from './config/imgpreload.js';
+// import imgPreloaderList from './config/imagepreloadlist.js';
+
+// (async () => {
+//   await imgsPreloader(imgPreloaderList);
+//   //关闭加载弹框
+//   document.querySelector('.loading').style.display = 'none';
+//   new Vue({
+//     router,
+//     store,
+//     render: h => h(App)
+//   }).$mount('#app');
+// })();
 
 new Vue({
   el: '#app',

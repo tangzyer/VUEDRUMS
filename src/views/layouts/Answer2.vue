@@ -28,7 +28,7 @@ export default {
       state:false,
       qstindex:2,
       imagepath:"new",
-      bgurl:require("@/assets/images/图片11-5.jpg"),
+      bgurl:require("@/assets/images/"+this.imagepath+"图片11-5.jpg"),
       list:[
         {
           ans: require('@/assets/images/击鼓边.png'),
@@ -104,6 +104,7 @@ export default {
       var Height=document.documentElement.clientHeight;
       var ratio=Height/width;
       if(ratio>1.85) {this.iswide=false;this.imagepath="";}
+      this.bgurl=require("@/assets/images/"+this.imagepath+"图片11-5.jpg");
   }
 }
 

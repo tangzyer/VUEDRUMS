@@ -1,0 +1,131 @@
+html,body{
+      margin: 0;
+      height: 100%;
+}
+#main{
+      height: 100%;
+      position: relative;
+
+}
+#canvas{
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 10;
+}
+#text{
+      position: absolute;
+      z-index: 20;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+}
+#text img[class^="text_img"]{
+      display: none;
+      position: absolute;
+      /*width: 200px;*/
+      height: 600px;
+      width:300px;
+      top:0px;
+      left:0px;
+      right:0px;
+      bottom:0px;
+      /*border: 1px solid #bfbfbf;*/
+}
+
+#text img[class^="img_img"]{
+      display: none;
+      position: absolute;
+      /*width: 300px;*/
+      height: 300px;
+      /*left:50%;*/
+      /*top:50px;*/
+}
+#gradually img{
+        width:300px;
+        height:700px;
+        position: absolute;
+        z-index: 100;
+        top:20px;
+        left:-180px;
+}
+#gradually{
+      display: none;
+      position: absolute;
+      z-index: 100;
+      top:20px;
+      right:1000px;
+
+      /*perspective: 500px;*/
+}
+#butt{
+      transform: rotate3d(1,1,1,0deg);
+      /*width: 10%;*/
+      height: 100%;
+}
+.logo{
+      position: absolute;
+      height: 563px;
+}
+.butterfly{
+      display: none;
+      position: absolute;
+      bottom: 40%;
+     /* left: 30%;*/
+      z-index: 200;
+     /*border: 1px solid #ddd;*/
+      perspective: 500px;
+      /*transform: rotate(45deg);*/
+      height: 13%;
+}
+.touch{
+        position: fixed;
+        bottom: 2rem;
+        right: 1rem;
+        z-index: 500;
+        -webkit-animation-name: scaleDraw;
+        -webkit-animation-timing-function: ease-in-out;
+        -webkit-animation-iteration-count: infinite;
+        -webkit-animation-duration: 5s;
+        -webkit-animation-direction: alternate;
+}
+.touch span{
+        color: #333;
+        opacity: 0.5;
+        font-size: 12px;
+}
+#phone_touch{
+        width: 50px;
+        height: 50px;
+        margin: 0 auto;
+        background: url("img/effect/phone_touch.png");
+        background-repeat: no-repeat;
+}
+
+@-webkit-keyframes scaleDraw {
+    0% {
+        -webkit-transform:scale(1);
+    }
+    25% {
+        -webkit-transform:scale(1.1);
+    }
+    50% {
+        -webkit-transform:scale(1);
+    }
+    75% {
+        -webkit-transform:scale(1.1);
+    }
+} 
+.vertical{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+

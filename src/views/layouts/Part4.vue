@@ -52,14 +52,15 @@ export default {
         this.videoon=true;
         this.sta="15-1";
         var self=this;
+        this.img=require('@/assets/images/图片15-1.jpg');
         self.bgon=false;
         this.$nextTick(() => {
           console.log("getting element");
           //self.img=require('@/assets/images/图片15-1.jpg');
           document.getElementById('myvideo').loop = false // 不设置视频循环播放
           document.getElementById('myvideo').addEventListener('ended',function(){
-            self.img=require('@/assets/images/图片15-1.jpg');
-            self.bgon=true;
+            //self.img=require('@/assets/images/图片15-1.jpg');
+            //self.bgon=true;
             console.log("ended video playing")
             self.videoon=false;
             self.move();
@@ -67,6 +68,8 @@ export default {
         });
       }
       else if(this.sta=="15-1"){
+        //this.img=require('@/assets/images/图片15-1.jpg');
+        this.bgon=true;
         this.sta="15-2";
       }
       else if(this.sta=="15-2"){

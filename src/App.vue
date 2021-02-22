@@ -10,6 +10,16 @@
 <script>
 export default {
   name: 'App',
+  data(){
+    return{
+      count: 0,
+      percent:'',
+      imglength:0
+    }
+  },
+  // mounted(){
+  //   this.preload()
+  // },
   methods:{
     play(stage){
       if (stage=="part3"){
@@ -35,8 +45,16 @@ export default {
         audio.src=require("@/assets/audio/总结.wav");
          audio.play();
       }
-    }
-  }
+    },
+  
+  },
+  // watch: {
+  //   count: function(val) {
+  //     if (val === this.imglength) {
+  //       document.body.removeChild(document.getElementById('Loading'))
+  //     }
+  //   }
+  // }
 }
 </script>
 <style lang="scss"></style>

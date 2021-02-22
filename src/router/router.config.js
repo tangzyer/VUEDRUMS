@@ -6,7 +6,7 @@ export const constantRouterMap = [
   {
     path: '/',
     component: () => import('@/views/layouts/index'),
-    redirect: '/home',
+    // redirect: '/home',
     meta: {
       title: '进入',
       keepAlive: true
@@ -83,7 +83,7 @@ export const constantRouterMap = [
   },
   {
     path: '/anima',
-    component: () => import('@/views/layouts/Animate'),
+    component: () => import('@/views/layouts/AnimateTest'),
     meta: { title: '关于我', keepAlive: false }
   },
   {
@@ -96,7 +96,4 @@ export const constantRouterMap = [
     component:() => import('@/views/layouts/Part4'),
     meta: { title: '关于我', keepAlive: false }
   }
-
-
-
 ]

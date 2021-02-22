@@ -1,11 +1,16 @@
 <template>
   <div>
+    <div class="loading-wrapper" v-show="showLoading">
+      <Loading></Loading>
+    </div>
     <bg v-bind:imgurl='img' v-bind:transon="ton" v-bind:long="lo" v-show="bgon" v-bind:stage='sta' @toNext="move"></bg>
-    <transition name="moveUp">
+    <!-- <transition name="moveUp"> -->
     <img class="text" :src='text1' v-if="text1on" :style="{transition:'transform '+transform+'s linear',webkitTransform:'-webkit-transform '+transform+'s linear'}" @click= "move">
-    </transition>
-    <video class="vi" v-if="videoon" id="myvideo" :src="videoSrc" :autoplay="autoplay" webkit-playsinline=‘true’ playsinline=‘true’>
+    <!-- </transition> -->
+    <!-- <div class="test" id="vid"> -->
+    <video class="vi" preload="auto" v-if="videoon" id="myvideo" :src="videoSrc" :autoplay="autoplay" webkit-playsinline=‘true’ playsinline=‘true’ x5-video-player-type="h5">
     </video>
+    <!-- </div> -->
      <div class="player">
     <div
       class="player-cd"
@@ -29,6 +34,8 @@
 <script>
 import TabBar from '@/components/TabBar'
 import Bg from '@/components/Bg'
+import Loading from '@/components/Loading'
+import wechatH5Video from "wechat-h5-video";
 export default {
   name: 'AppLayout',
   data() {
@@ -48,11 +55,14 @@ export default {
       transform:11,
       lo:false,
       iswide:false,
-      imagepath:'new'
+      imagepath:'new',
+      showLoading: false,
+      count: 0,
     }
   },
   components: {
-    Bg
+    Bg,
+    Loading
   },
   methods: {
     handleChange(v) {
@@ -202,7 +212,36 @@ export default {
         this.$router.push('/line')
       }
 
-    }
+    },
+    preload: function() {
+      let imgs = [
+        require("@/assets/images/1-1.jpg"),
+        require("@/assets/images/文字1.png"),
+        require("@/assets/images/battlefield.jpg"),
+        require("@/assets/images/2-01.jpg"),
+        require("@/assets/images/"+this.imagepath+"图片3-1.jpg"),
+        require("@/assets/images/"+this.imagepath+"图片4-1.jpg"),
+        require("@/assets/images/4-2.jpg"),
+        require("@/assets/images/4-3.jpg"),
+        require("@/assets/images/5-1.jpg"),
+        require("@/assets/images/5-2.jpg"),
+        require("@/assets/images/5-3.jpg"),
+        require("@/assets/images/5-4.jpg"),
+        require('@/assets/images/background.jpg'),
+        // "static/图片11-1.png",
+        // "static/四月.png",
+      ]
+
+      for (let img of imgs) {
+        let image = new Image()
+        image.src = img
+        image.onload = () => {
+          this.count++
+          console.log(this.count)
+        }
+      }
+
+    },
   },
   created(){
       var width=document.documentElement.clientWidth;
@@ -215,6 +254,7 @@ export default {
       this.audiosrc=require("@/assets/audio/opening.wav")
   },
   mounted () {
+  //  this.preload();
     // var de = document.documentElement;
     // if (de.requestFullscreen) {
     //     de.requestFullscreen();
@@ -230,6 +270,17 @@ export default {
       // });
       // audio = document.getElementById('audio')
       // audio.play();
+  },
+  watch: {
+    count: function(val) {
+      // console.log(val)
+      if (val === 13) {
+        // 图片加载完成后跳转页面
+        //this.$router.push('/home')
+        this.showLoading=false;
+        this.bgon=true;
+      }
+    }
   }
 }
 </script>
@@ -249,6 +300,10 @@ export default {
 		/* background: url("../../common/images/1-1.jpg") no-repeat;
 		background-size: cover; */
 	}
+  .test{
+    width: 100%;
+  	height: 100%;
+  }
   .text{
     z-index: 100;
     width:100%;

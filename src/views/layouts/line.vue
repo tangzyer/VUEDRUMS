@@ -183,8 +183,9 @@ export default {
       this.width0=e1.left-e0.right+40;
       this.height0=e5.top-e0.bottom+50;
       this.height1=e3.bottom-e0.bottom;
-      this.height2=30;
+      this.height2=10;
       this.top3=(e0.bottom+e0.top)/2;
+     // this.top3=e0.top+(e0.bottom-e0.top)/3;
       this.top4=(e5.bottom+e5.top)/2;
       this.height3=this.height0+e0.height-20;
     //   style1={
@@ -204,7 +205,7 @@ export default {
 		top: 0;
 		right: 0;
 		bottom: 0;
-        padding-top:1.5rem;
+        padding-top:0.5rem;
         padding-bottom:2rem;
         padding-left:0.5rem;
         padding-right:0.5rem;
